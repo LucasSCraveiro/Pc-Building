@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <title>PC Building</title>
+    <script th:src="@{/js/index.js}"></script>
+    <script th:src="@{https://cdn.tailwindcss.com}"></script>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+    <div th:include="fragments/fragmentos :: barraNavegacao"></div>
+    <div class="grow bg-blue-100 flex flex-col justify-center items-center">
+        <img th:src="@{/images/Construcao.png}" class="">
+        <p class="text-5xl">Site em construção</p>
+    </div>
+    <div th:include="fragments/fragmentos :: barraInferior"></div>
+</body>
+</html>

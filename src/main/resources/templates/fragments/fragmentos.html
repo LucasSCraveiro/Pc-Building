@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div th:fragment="barraNavegacao">
+        <div class="grid grid-cols-6 py-5 bg-blue-500 px-5 text-white">
+            <div class="col-span-1">
+                <p>Justo Craveiro's PC Building</p>
+            </div>
+            <div class="col-span-4">
+                <ul class="grow space-x-4 justify-start flex">
+                    <li><a th:href="@{/}">Início</a></li>
+                    <li><a th:href="@{/computadores}">Computadores</a></li>
+                    <li><a th:href="@{/pecas}">Peças</a></li>
+                    <li><a th:href="@{/comunidade}">Comunidade</a></li>
+                    <li><a th:href="@{/configuracoes}">Configurações</a></li>
+                </ul>
+            </div>
+            <div class="col-span-1 justify-end">
+                <p class="text-right">Olá usuário</p>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="barraInferior">
+        <div class="py-5 bg-blue-500 text-white">
+            <p class="text-center">Copyright 2025₢ Lucas dos Santos Craveiro e Victor Guerreiro Paiva Justo</p>
+        </div>
+    </div>
+</body>
+</html>
