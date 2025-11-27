@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <title>PC Building - Detalhes do Computador</title>
+    <script th:src="@{/js/index.js}"></script>
+    <script th:src="@{https://cdn.tailwindcss.com}"></script>
+</head>
+<body class="min-h-screen flex flex-col justify-between bg-gray-50">
+    <div th:include="fragments/fragmentos :: barraNavegacao"></div>
+    <div class="grow container mx-auto px-4 py-8">
+        <div class="bg-white rounded p-6 shadow">
+            <h1 class="text-2xl font-bold mb-2" th:text="${computador.nome}"></h1>
+            <p class="mb-4 text-gray-600" th:text="${computador.descricao}"></p>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <p><strong>Processador:</strong> <span th:text="${computador.processador}"></span></p>
+                    <p><strong>RAM:</strong> <span th:text="${computador.ram}"></span></p>
+                    <p><strong>Armazenamento:</strong> <span th:text="${computador.armazenamento}"></span></p>
+                </div>
+                <div>
+                    <p><strong>Categoria:</strong> <span th:text="${computador.categoria}"></span></p>
+                    <p><strong>Preço:</strong> R$ <span th:text="${computador.preco}"></span></p>
+                </div>
+            </div>
+            <div class="mt-4">
+                <a th:href="@{/computadores/{id}/editar(id=${computador.id})}" class="bg-blue-600 text-white px-4 py-2 rounded">Editar</a>
+                <a href="/computadores" class="bg-gray-200 text-gray-800 px-4 py-2 rounded">Voltar</a>
+            </div>
+        </div>
+    </div>
+    <div th:include="fragments/fragmentos :: barraInferior"></div>
+</body>
+</html>

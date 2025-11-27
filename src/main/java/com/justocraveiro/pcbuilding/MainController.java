@@ -12,11 +12,6 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/computadores")
-    public String computadores()
-    {
-        return "computadores";
-    }
 
     @GetMapping("/pecas")
     public String pecas()

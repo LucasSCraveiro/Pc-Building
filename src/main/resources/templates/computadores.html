@@ -15,27 +15,25 @@
         <!-- titulo e possível botão -->
         <div class="flex justify-between items-center mb-8">
             <h1 class="text-3xl font-bold text-gray-800">Modelos de Computadores</h1>
-            <a href="/computadores/novo" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition">
+            <a th:href="@{/computadores/novo}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition">
                 + Criar Novo Modelo
             </a>
         </div>
-
         <!-- filtro para otimizar busca -->
         <div class="mb-6 flex gap-4 border-b border-gray-300">
-            <button class="tab-btn active px-4 py-2 font-semibold text-blue-600 border-b-2 border-blue-600" data-filter="todos">
+            <button th:classappend="${filtroAtual == null || filtroAtual == 'todos'} ? ' active px-4 py-2 font-semibold text-blue-600 border-b-2 border-blue-600' : ' px-4 py-2 font-semibold text-gray-600 hover:text-blue-600'" class="tab-btn" data-filter="todos">
                 Todos os Modelos
             </button>
-            <button class="tab-btn px-4 py-2 font-semibold text-gray-600 hover:text-blue-600" data-filter="gaming">
+            <button th:classappend="${filtroAtual == 'gaming'} ? ' active px-4 py-2 font-semibold text-blue-600 border-b-2 border-blue-600' : ' px-4 py-2 font-semibold text-gray-600 hover:text-blue-600'" class="tab-btn" data-filter="gaming">
                 Gaming
             </button>
-            <button class="tab-btn px-4 py-2 font-semibold text-gray-600 hover:text-blue-600" data-filter="office">
+            <button th:classappend="${filtroAtual == 'office'} ? ' active px-4 py-2 font-semibold text-blue-600 border-b-2 border-blue-600' : ' px-4 py-2 font-semibold text-gray-600 hover:text-blue-600'" class="tab-btn" data-filter="office">
                 Trabalho/Office
             </button>
-            <button class="tab-btn px-4 py-2 font-semibold text-gray-600 hover:text-blue-600" data-filter="servidor">
+            <button th:classappend="${filtroAtual == 'servidor'} ? ' active px-4 py-2 font-semibold text-blue-600 border-b-2 border-blue-600' : ' px-4 py-2 font-semibold text-gray-600 hover:text-blue-600'" class="tab-btn" data-filter="servidor">
                 Servidor
             </button>
         </div>
-
         <!-- espaço dos modelos -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- exemplo modelo pré pronto -->
@@ -43,10 +41,7 @@
                 <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-6 border-t-4 border-blue-600">
                     <!-- categoria-->
                     <div class="mb-2">
-                        <span th:class="'inline-block px-3 py-1 rounded-full text-sm font-semibold ' + 
-                            (${modelo.categoria == 'gaming'} ? 'bg-red-100 text-red-800' : 
-                             ${modelo.categoria == 'office'} ? 'bg-green-100 text-green-800' : 
-                             'bg-gray-100 text-gray-800')">
+                                <span th:class="${modelo.categoria == 'gaming'} ? 'inline-block px-3 py-1 rounded-full text-sm font-semibold bg-red-100 text-red-800' : (${modelo.categoria == 'office'} ? 'inline-block px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-800' : 'inline-block px-3 py-1 rounded-full text-sm font-semibold bg-gray-100 text-gray-800')">
                             [[${modelo.categoria}]]
                         </span>
                     </div>
@@ -92,10 +87,10 @@
             </th:block>
         </div>
 
-        <!-- começo da tela de erro -->
+        <!--tela de erro -->
         <div th:if="${#lists.isEmpty(modelos)}" class="text-center py-12">
             <p class="text-gray-600 text-lg mb-4">Nenhum modelo encontrado</p>
-            <a href="/computadores/novo" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition inline-block">
+            <a th:href="@{/computadores/novo}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition inline-block">
                 Criar Primeiro Modelo
             </a>
         </div>
@@ -114,7 +109,12 @@
                 document.querySelectorAll('.tab-btn').forEach(b => b.classList.add('text-gray-600'));
                 this.classList.add('active', 'border-b-2', 'border-blue-600', 'text-blue-600');
                 
-                // backend pendente
+                
+                if (filter === 'todos') {
+                    window.location.href = '/computadores';
+                } else {
+                    window.location.href = '/computadores?categoria=' + encodeURIComponent(filter);
+                }
             });
         });
     </script>
