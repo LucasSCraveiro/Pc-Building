@@ -24,20 +24,40 @@
             <div class="grid grid-cols-3 gap-3">
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Processador</label>
-                    <input type="text" th:field="*{processador}" class="mt-1 block w-full border rounded p-2" />
+                    <select id="selectProcessador" th:field="*{processador}" class="mt-1 block w-full border rounded p-2">
+                        <option value="" data-price="0">-- Escolha um processador --</option>
+                        <option th:value="'Intel i5 12400'" th:selected="${computador.processador} == 'Intel i5 12400'" data-price="900">Intel i5 12400 - R$ 900</option>
+                        <option th:value="'Intel i7 12700'" th:selected="${computador.processador} == 'Intel i7 12700'" data-price="1400">Intel i7 12700 - R$ 1.400</option>
+                        <option th:value="'Intel i9 12900'" th:selected="${computador.processador} == 'Intel i9 12900'" data-price="2500">Intel i9 12900 - R$ 2.500</option>
+                        <option th:value="'AMD Ryzen 5 5600X'" th:selected="${computador.processador} == 'AMD Ryzen 5 5600X'" data-price="800">AMD Ryzen 5 5600X - R$ 800</option>
+                        <option th:value="'AMD Ryzen 7 5800X'" th:selected="${computador.processador} == 'AMD Ryzen 7 5800X'" data-price="1200">AMD Ryzen 7 5800X - R$ 1.200</option>
+                    </select>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">RAM</label>
-                    <input type="text" th:field="*{ram}" class="mt-1 block w-full border rounded p-2" />
+                    <select id="selectRam" th:field="*{ram}" class="mt-1 block w-full border rounded p-2">
+                        <option value="" data-price="0">-- Escolha a memória RAM --</option>
+                        <option th:value="'8GB DDR4'" th:selected="${computador.ram} == '8GB DDR4'" data-price="150">8GB DDR4 - R$ 150</option>
+                        <option th:value="'16GB DDR4'" th:selected="${computador.ram} == '16GB DDR4'" data-price="250">16GB DDR4 - R$ 250</option>
+                        <option th:value="'32GB DDR4'" th:selected="${computador.ram} == '32GB DDR4'" data-price="450">32GB DDR4 - R$ 450</option>
+                        <option th:value="'64GB DDR4'" th:selected="${computador.ram} == '64GB DDR4'" data-price="800">64GB DDR4 - R$ 800</option>
+                    </select>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Armazenamento</label>
-                    <input type="text" th:field="*{armazenamento}" class="mt-1 block w-full border rounded p-2" />
+                    <select id="selectArmazenamento" th:field="*{armazenamento}" class="mt-1 block w-full border rounded p-2">
+                        <option value="" data-price="0">-- Escolha o armazenamento --</option>
+                        <option th:value="'256GB SSD'" th:selected="${computador.armazenamento} == '256GB SSD'" data-price="120">256GB SSD - R$ 120</option>
+                        <option th:value="'512GB SSD'" th:selected="${computador.armazenamento} == '512GB SSD'" data-price="200">512GB SSD - R$ 200</option>
+                        <option th:value="'1TB SSD'" th:selected="${computador.armazenamento} == '1TB SSD'" data-price="350">1TB SSD - R$ 350</option>
+                        <option th:value="'2TB HDD'" th:selected="${computador.armazenamento} == '2TB HDD'" data-price="100">2TB HDD - R$ 100</option>
+                    </select>
                 </div>
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700">Preço (R$)</label>
-                <input type="number" step="0.01" th:field="*{preco}" class="mt-1 block w-full border rounded p-2" />
+                <input id="precoInput" name="preco" type="number" step="0.01" th:value="${computador.preco}" class="mt-1 block w-full border rounded p-2 bg-gray-100" readonly />
+                <p id="precoDisplay" class="mt-2 text-gray-700">R$ <span th:text="${computador.preco} != null ? ${computador.preco} : '0.00'">0.00</span></p>
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700">Categoria</label>
@@ -54,5 +74,42 @@
         </form>
     </div>
     <div th:include="fragments/fragmentos :: barraInferior"></div>
+    <script>
+        (function() {
+            const selProc = document.getElementById('selectProcessador');
+            const selRam = document.getElementById('selectRam');
+            const selArma = document.getElementById('selectArmazenamento');
+            const precoInput = document.getElementById('precoInput');
+            const precoDisplay = document.getElementById('precoDisplay');
+            function parsePrice(v){
+                const n = parseFloat(v);
+                return isNaN(n) ? 0 : n;
+            }
+            function updatePrice(){
+                let total = 0;
+                [selProc, selRam, selArma].forEach(sel => {
+                    if(!sel) return;
+                    const opt = sel.selectedOptions && sel.selectedOptions[0];
+                    if(opt){
+                        total += parsePrice(opt.getAttribute('data-price'));
+                    }
+                });
+                if(precoInput) precoInput.value = total.toFixed(2);
+                if(precoDisplay) precoDisplay.textContent = 'R$ ' + total.toFixed(2);
+            }
+            [selProc, selRam, selArma].forEach(sel => {
+                if(sel) sel.addEventListener('change', updatePrice);
+            });
+            document.addEventListener('DOMContentLoaded', function(){
+                updatePrice();
+            });
+            const form = document.querySelector('form');
+            if(form){
+                form.addEventListener('submit', function(){
+                    updatePrice();
+                });
+            }
+        })();
+    </script>
 </body>
 </html>
