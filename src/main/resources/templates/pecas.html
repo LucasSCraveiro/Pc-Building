@@ -12,6 +12,71 @@
     <div th:include="fragments/fragmentos :: barraNavegacao"></div>
     <div class="grow bg-blue-100">
 
+        <div class="container mx-auto px-4 py-8">
+            <h1 class="text-3xl font-bold mb-6">Catálogo de Peças</h1>
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4">Processadores</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div th:each="p : ${processadores}" class="bg-white p-4 rounded shadow">
+                        <h3 class="font-bold" th:text="${p.nome}">Nome</h3>
+                        <p class="text-sm text-gray-600">Preço: R$ <span th:text="${p.preco}">0.00</span></p>
+                        <p class="text-xs text-gray-500 mt-2" th:text="${p.tipo}">PROCESSADOR</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4">Memória RAM</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div th:each="p : ${rams}" class="bg-white p-4 rounded shadow">
+                        <h3 class="font-bold" th:text="${p.nome}">Nome</h3>
+                        <p class="text-sm text-gray-600">Preço: R$ <span th:text="${p.preco}">0.00</span></p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4">Armazenamento</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div th:each="p : ${armazenamentos}" class="bg-white p-4 rounded shadow">
+                        <h3 class="font-bold" th:text="${p.nome}">Nome</h3>
+                        <p class="text-sm text-gray-600">Preço: R$ <span th:text="${p.preco}">0.00</span></p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4">Placas de vídeo (GPU)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div th:each="p : ${gpus}" class="bg-white p-4 rounded shadow">
+                        <h3 class="font-bold" th:text="${p.nome}">Nome</h3>
+                        <p class="text-sm text-gray-600">Preço: R$ <span th:text="${p.preco}">0.00</span></p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4">Placas-mãe</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div th:each="p : ${placasMae}" class="bg-white p-4 rounded shadow">
+                        <h3 class="font-bold" th:text="${p.nome}">Nome</h3>
+                        <p class="text-sm text-gray-600">Preço: R$ <span th:text="${p.preco}">0.00</span></p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4">Fontes</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div th:each="p : ${fontes}" class="bg-white p-4 rounded shadow">
+                        <h3 class="font-bold" th:text="${p.nome}">Nome</h3>
+                        <p class="text-sm text-gray-600">Preço: R$ <span th:text="${p.preco}">0.00</span></p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
     </div>
     <div th:include="fragments/fragmentos :: barraInferior"></div>
 </body>

@@ -12,6 +12,44 @@
     <div th:include="fragments/fragmentos :: barraNavegacao"></div>
     <div class="grow bg-blue-100">
 
+        <div class="container mx-auto px-4 py-8">
+            <h1 class="text-3xl font-bold mb-6">Comunidade</h1>
+
+            <div class="space-y-6">
+                <!-- Post 1 -->
+                <article class="bg-white p-6 rounded-lg shadow">
+                    <header class="flex items-center justify-between mb-4">
+                        <div>
+                            <h2 class="text-xl font-semibold">Minha primeira build: Ryzen + 3080</h2>
+                            <p class="text-sm text-gray-500">por <strong>Lucas</strong> · <span class="text-xs">12 de Nov, 2025</span></p>
+                        </div>
+                        <div class="text-sm text-gray-600">Categoria: Discussão</div>
+                    </header>
+                    <p class="text-gray-700">Acabei de finalizar minha primeira montagem com um Ryzen 7 e uma RTX 3080 — estou muito satisfeito com o desempenho em jogos AAA. Compartilho aqui alguns ajustes de BIOS e recomendações de resfriamento.</p>
+                    <footer class="mt-4 flex items-center justify-between text-sm text-gray-500">
+                        <div>👍 24</div>
+                        <div>💬 8 comentários</div>
+                    </footer>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="bg-white p-6 rounded-lg shadow">
+                    <header class="flex items-center justify-between mb-4">
+                        <div>
+                            <h2 class="text-xl font-semibold">Dúvida sobre compatibilidade de RAM</h2>
+                            <p class="text-sm text-gray-500">por <strong>Ana</strong> · <span class="text-xs">20 de Nov, 2025</span></p>
+                        </div>
+                        <div class="text-sm text-gray-600">Categoria: Ajuda</div>
+                    </header>
+                    <p class="text-gray-700">Estou com dúvida se vale a pena usar 32GB de RAM 3600MHz ou 64GB 2666MHz para edição de vídeo. Alguém já testou workflows com Premiere/DaVinci?</p>
+                    <footer class="mt-4 flex items-center justify-between text-sm text-gray-500">
+                        <div>👍 12</div>
+                        <div>💬 5 comentários</div>
+                    </footer>
+                </article>
+            </div>
+        </div>
+
     </div>
     <div th:include="fragments/fragmentos :: barraInferior"></div>
 </body>
